@@ -16,8 +16,9 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include
 
-from orders.views import OrdersView
+from orders.views import *
 from shop.views import CategoryView, ShopView, ProductView
+from users.views import signup
 
 
 urlpatterns = [
@@ -26,4 +27,9 @@ urlpatterns = [
     path('shops', ShopView.as_view(), name='shops'),
     path('products', ProductView.as_view(), name='products'),
     path('orders', OrdersView.as_view(), name='orders'),
+    path('signup/', signup, name='signup'),
+    path('cart/', cart, name='cart'),
+    path('add-to-cart/<int:product_id>/', add_to_cart, name='add_to_cart'),
+    path('remove-from-cart/int:product_id/', remove_from_cart, name='remove_from_cart'),
+    path('checkout/', checkout, name='checkout'),
 ]

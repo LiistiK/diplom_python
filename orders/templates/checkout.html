@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h1>Оформление заказа</h1>
+{% if order.products.all %}
+<form method="post">
+    {% csrf_token %}
+    <table>
+        <thead>
+            <tr>
+                <th>Название</th>
+                <th>Цена</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for product in order.products.all %}
+            <tr>
+                <td>{{ product.name }}</td>
+                <td>{{ product.price }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+        <tfoot>
+            <tr>
+                <td>Итого:</td>
+                <td>{{ order.total_price }}</td>
+            </tr>
+        </tfoot>
+    </table>
+    <button type="submit">Подтвердить заказ</button>
+</form>
+{% else %}
+<p>Корзина пуста.</p>
+{% endif %}
+{% endblock %}
